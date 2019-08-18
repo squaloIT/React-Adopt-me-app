@@ -35,3 +35,13 @@ Tu je kako bi moj kod bio bolji. Odnosno kako bi standardizovao nacin pisanja ko
 
 E sad na ovaj nacin to radi samo kada ga pokrenem kroz cmd, ali mogu da definisem pomocu extenzije Prettier Code Formating da se prilikom svakog Save-a to uradi.
 Postavljam to
+
+
+
+ESLINT 
+instalacija kroz cmd, nakon toga instalacija eslint-config-prettier koji omogucava da eslint pokupi pravila od prettier-a.
+
+Komanda unutar package.json koja pokrece prettier
+"lint": "eslint \"src/**/*.{js, jsx}\" --quiet"
+
+Nakon ovoga dodata ekstenzija editoru kako bi prilikom kucanja koda odmah bila pronadjena greska, ne kad pokrenem cmd.

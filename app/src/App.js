@@ -1,5 +1,5 @@
 // const Pet = props => {
-const Pet = ({ animal, name, breed }) => {
+const Pet = ({ name, breed }) => {
   // KORISTIM DESCTRUCTURING UMESTO CELOG PROPS
   return React.createElement("div", {}, [
     React.createElement("h1", {}, name + " " + breed),
