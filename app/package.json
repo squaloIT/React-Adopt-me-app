@@ -1,0 +1,11 @@
+{
+  "name": "adopt-me",
+  "version": "1.0.0",
+  "description": "React vezba",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nikola Mihajlovic <nikola.mihajlovic@ict.edu.rs>",
+  "license": "MIT"
+}

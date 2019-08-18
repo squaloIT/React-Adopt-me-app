@@ -7,3 +7,20 @@ React Native je isto sto i dom, samo sto on funkcionise za android i IOS aplikac
 
 Komponenta koju sam napravio, ne moze da postoji sama za sebe osim ako ne iskoristim React DOM da tu komponentu negde renderujem.
 Moc react-a je sto ta komponenta moze da sadrzi druge komponente, koje mogu da sadrze druge komponente i tome slicno.
+
+Kreiranje GIT
+
+…or create a new repository on the command line
+echo "# React-Adopt-me-app" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/squaloIT/React-Adopt-me-app.git
+git push -u origin master
+…or push an existing repository from the command line
+git remote add origin https://github.com/squaloIT/React-Adopt-me-app.git
+git push -u origin master
+…or import code from another repository
+You can initialize this repository with code from a Subversion, Mercurial, or TFS project.
+
+
