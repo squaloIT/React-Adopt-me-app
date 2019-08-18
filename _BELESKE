@@ -26,3 +26,12 @@ You can initialize this repository with code from a Subversion, Mercurial, or TF
 
 Prettier - devDependency 
 Tu je kako bi moj kod bio bolji. Odnosno kako bi standardizovao nacin pisanja koda kod mene i kod svih drugih koji rade na projektu.
+
+"format": "prettier \"src/**/*.{js, html}\" --write"
+- Ovo sam stavio u package.json, i kada pokrenem ovo sve se ispravi u svakom fajlu u skladu sa pravilima prettier-a.
+- Bez --write on bi mi samo u konzoli ispisao sta je uradio, sa ovim upisuje to u fajlove.
+- Moraju dupli navodnici!
+
+
+E sad na ovaj nacin to radi samo kada ga pokrenem kroz cmd, ali mogu da definisem pomocu extenzije Prettier Code Formating da se prilikom svakog Save-a to uradi.
+Postavljam to

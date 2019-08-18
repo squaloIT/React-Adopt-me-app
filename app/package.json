@@ -4,7 +4,8 @@
   "description": "React vezba",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier \"src/**/*.{js, html}\" --write"
   },
   "author": "Nikola Mihajlovic <nikola.mihajlovic@ict.edu.rs>",
   "license": "MIT",
