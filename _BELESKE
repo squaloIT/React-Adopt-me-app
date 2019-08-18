@@ -24,3 +24,5 @@ git push -u origin master
 You can initialize this repository with code from a Subversion, Mercurial, or TFS project.
 
 
+Prettier - devDependency 
+Tu je kako bi moj kod bio bolji. Odnosno kako bi standardizovao nacin pisanja koda kod mene i kod svih drugih koji rade na projektu.
