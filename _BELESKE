@@ -1,0 +1,9 @@
+emmet.io - pogledati njihove komande koje olaksavaju pisanje koda
+
+Sta je react a sta react dom? React je veoma mali sa svega recimo 2kb i on govori kako treba da interaktujemo sa react-om.
+React dom je ustvari ona veca biblioteka koja uzima react package i renderuje sve potrebno u dom.
+React Native je isto sto i dom, samo sto on funkcionise za android i IOS aplikacije.
+
+
+Komponenta koju sam napravio, ne moze da postoji sama za sebe osim ako ne iskoristim React DOM da tu komponentu negde renderujem.
+Moc react-a je sto ta komponenta moze da sadrzi druge komponente, koje mogu da sadrze druge komponente i tome slicno.
