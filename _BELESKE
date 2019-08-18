@@ -56,3 +56,56 @@ npm i -D parcel-bundler
 
 Konfiguracija parcel-a ne postoji, sve sto treba da uradim jeste da unutar package.json-a postavim : 
 "dev": "parcel src/index.html" 
+
+
+PODESAVANJA REACT-A SA ESLINT-om i BABELOM
+
+npm install -D babel-eslint eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react
+
+.eslintrc
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/errors",
+    "plugin:react/recommended",
+    "plugin:jsx-a11y/recommended",
+    "prettier",
+    "prettier/react"
+  ],
+  "rules": {
+    "react/prop-types": 0,
+    "no-console": 1
+  },
+  "plugins": ["react", "import", "jsx-a11y"],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}
+
+
+return (
+  <div>
+    <h1>
+      Neki tekst
+    </h1>
+  </div>
+);
+- Ovde zagrade ne rade nista zapravo, smao kazu da ce se kod koji se vraca prostirati na vise linija koda 
+
+
+- Ono sto moze da se nadje unutar { } jsx-a je ono sto moze da se nadje sa desne strane = bilo kog statement-a
+- Moze biti naprimer name + breed ali ne i if izraz
