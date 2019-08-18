@@ -1,12 +1,6 @@
-// const Pet = props => {
-const Pet = ({ name, breed }) => {
-  // KORISTIM DESCTRUCTURING UMESTO CELOG PROPS
-  return React.createElement("div", {}, [
-    React.createElement("h1", {}, name + " " + breed),
-    React.createElement("h2", {}, name + " " + breed),
-    React.createElement("h3", {}, name + " " + breed)
-  ]);
-};
+import React from "react";
+import { render } from "react-dom";
+import Pet from "./Pet";
 
 const App = () => {
   return React.createElement(
@@ -40,4 +34,4 @@ const App = () => {
   );
 };
 
-ReactDOM.render(React.createElement(App), document.getElementById("root"));
+render(React.createElement(App), document.getElementById("root"));

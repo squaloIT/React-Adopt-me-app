@@ -45,3 +45,14 @@ Komanda unutar package.json koja pokrece prettier
 "lint": "eslint \"src/**/*.{js, jsx}\" --quiet"
 
 Nakon ovoga dodata ekstenzija editoru kako bi prilikom kucanja koda odmah bila pronadjena greska, ne kad pokrenem cmd.
+
+
+
+PARCEL
+
+Veoma je pametan, nema konfiguraciju jer sam konta sve stvari i bundeluje fajlove. Webpack mocniji i bolji ali kompleksniji, dok je parcel slabiji ali mnogo mocniji.
+
+npm i -D parcel-bundler
+
+Konfiguracija parcel-a ne postoji, sve sto treba da uradim jeste da unutar package.json-a postavim : 
+"dev": "parcel src/index.html" 
