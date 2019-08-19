@@ -124,3 +124,12 @@ npm i -D eslint-plugin-react-hooks
 CUSTOM hooks
 
 Prave se kao i svaka druga komponenta, jedina razlika je sto unutar sebe koriste useState, i funkcija koja se vraca dobija stanje. Primer useDropdown
+
+
+Ucitati pet iz @front
+Ucitati useEffect iz react
+
+useEffect menja nekoliko lifecycle hooks koje imamo unutar klasa kada radimo sa react.
+https://reactjs.org/docs/hooks-effect.html
+
+useEffect se ne izvrsava odmah, nego nakon sto se sve ucita po prvi put. Sve je sadrzaj komponente jer zelimo da korisnik vidi nesto odmah, pa kada stigne odgovor od strane servera to je okej onda cemo ga ucitati.
