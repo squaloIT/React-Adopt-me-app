@@ -124,3 +124,18 @@ npm i -D eslint-plugin-react-hooks
 CUSTOM hooks
 
 Prave se kao i svaka druga komponenta, jedina razlika je sto unutar sebe koriste useState, i funkcija koja se vraca dobija stanje. Primer useDropdown
+
+
+Ucitati pet iz @front
+Ucitati useEffect iz react
+
+useEffect menja nekoliko lifecycle hooks koje imamo unutar klasa kada radimo sa react.
+https://reactjs.org/docs/hooks-effect.html
+
+useEffect se ne izvrsava odmah, nego nakon sto se sve ucita po prvi put. Sve je sadrzaj komponente jer zelimo da korisnik vidi nesto odmah, pa kada stigne odgovor od strane servera to je okej onda cemo ga ucitati.
+
+Kada god radim sa react-om obavezno moram postaviti NODE_ENV=development, a OBAVEZNO PRE PRODUCTION MENJATI U PRODUCTION!
+Ovo Parcel radi za mene.
+
+<React.Strict></React.Strict> - je komponenta kojom mogu obmotati celu moju aplikaciju ili barem deo moje aplikacije. Ono sto ona radi jeste da vodi racuna da u tim komponentama koje su obmotanje ovom komponetnom, ne mogu da koristim neke funkcije ili stvari koje React zeli da odbaci ( deprecated ). To je dobro jer necu imati problema kasnije.
+- Mogu da definisem da neki stari deo aplikacije ne bude u strict modu, a neki noviji da. 
