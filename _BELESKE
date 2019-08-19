@@ -109,3 +109,18 @@ return (
 
 - Ono sto moze da se nadje unutar { } jsx-a je ono sto moze da se nadje sa desne strane = bilo kog statement-a
 - Moze biti naprimer name + breed ali ne i if izraz
+
+
+class se ne moze koristiti kao css klasa, jer je to kljucna rec u JS-u. Zato je className.
+
+
+ESLINT je podrzao react dev team u pisanju odredjenih pravila za hooks, i oni se mogu isntalirati putem npm-a
+npm i -D eslint-plugin-react-hooks
+  
+
+  Osim toga unutar eslintrc moram definisati i rule koji se zove "react-hooks/rules-of-hooks" i "react-hooks/exhaustive-deps"
+
+
+CUSTOM hooks
+
+Prave se kao i svaka druga komponenta, jedina razlika je sto unutar sebe koriste useState, i funkcija koja se vraca dobija stanje. Primer useDropdown
