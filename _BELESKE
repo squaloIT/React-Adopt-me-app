@@ -236,6 +236,12 @@ Unutar package.json fajla, Parcel-u mogu da kazem za koje verzije browsera treba
 
   Error Boundaries.
 
-  
+  Sa njima mogu da uhvatim greske bez da mi program crash-uje.
+
+    -ErrorBoundary.js
+    - Kod unutra iz dokumentacije
+    Pogldeati dokumentaciju i prekucati kod.
+
+    ERRORBOUNDARY KAKO SMO GA NAPISALI RADI SAMO SA SVOJOM DECOM. TAKO DA NE MOGU DA VRAPUJEM CELU APLIKACIJU NJIME, NEGO MORAM DA GA KORISTIM KAO HOC KAKO BIH MOGAO DA GA KORISTIM.
   
   static getDerivedStateFromProps - pogledati dokumentaciju

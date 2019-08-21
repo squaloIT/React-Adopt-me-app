@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import pet from "@frontendmasters/pet";
 import Carousel from "./Carousel";
+import ErrorBoundary from "./ErrorBoundary";
 
 class Details extends Component {
   constructor(props) {
@@ -40,6 +41,7 @@ class Details extends Component {
     this.docekajAnimal();
   }
   render() {
+    // throw new Error("MOJA GRESKA");
     return this.state.loading ? (
       <img src="/img/loading-gif-800x600.gif" className="giphy" alt="Loader" />
     ) : (
@@ -62,4 +64,10 @@ class Details extends Component {
   }
 }
 
-export default Details;
+export default function DetailsWithBoundaries(props) {
+  return (
+    <ErrorBoundary>
+      <Details {...props} />
+    </ErrorBoundary>
+  );
+}
