@@ -1,16 +1,30 @@
 import React, { useState, useEffect } from "react";
 import useDropdown from "./useDropdown";
 import pet, { ANIMALS } from "@frontendmasters/pet";
+import Pets from "./Pets";
+
 //Kada postavim @ ispred nekog import-a, a imam instaliran parcer, on ce ovo sto sam importovao instalirati za mene kroz npm!
 
 const SearchParams = () => {
   const [location, setLocation] = useState("Seattle, WA");
   const [breeds, setBreeds] = useState([]);
+  const [pets, setPets] = useState([]);
   const [animal, AnimalDropdown] = useDropdown("Animal", "dog", ANIMALS);
   const [breed, BreedDropdown, setBreed] = useDropdown("Breed", "", breeds);
   //location je trenutna vrednost, a set location je setter funkcija. useState kada se pozove vraca niz sa dva elementa, prvi koji drzi trenutno stanje a drugi func koja menja to stanje.
   // Ovo je HOOK, svi Hook-ovi pocinju sa use.
   // Hooks nikada ne idu unutar if-a ili for-a ili bilo kod statementa.
+
+  async function getPetsAPI() {
+    const { animals } = await pet.animals({
+      location,
+      breed,
+      type: animal
+    });
+
+    setPets(animals || []);
+    console.log(pets);
+  }
 
   useEffect(() => {
     setBreeds([]);
@@ -29,7 +43,12 @@ const SearchParams = () => {
 
   return (
     <div className="search-params">
-      <form action="">
+      <form
+        onSubmit={e => {
+          e.preventDefault();
+          getPetsAPI();
+        }}
+      >
         <label htmlFor="location">
           Location
           <input
@@ -44,6 +63,7 @@ const SearchParams = () => {
         <BreedDropdown />
         <button>Submit</button>
       </form>
+      <Pets pets={pets} />
     </div>
   );
 };
