@@ -133,3 +133,104 @@ useEffect menja nekoliko lifecycle hooks koje imamo unutar klasa kada radimo sa 
 https://reactjs.org/docs/hooks-effect.html
 
 useEffect se ne izvrsava odmah, nego nakon sto se sve ucita po prvi put. Sve je sadrzaj komponente jer zelimo da korisnik vidi nesto odmah, pa kada stigne odgovor od strane servera to je okej onda cemo ga ucitati.
+
+
+Unutar package.json fajla, Parcel-u mogu da kazem za koje verzije browsera treba da transpajlira kod.
+
+"browserslist": [
+    "last 2 Chrome versions",
+    "last 2 ChromeAndroid versions",
+    "last 2 Firefox versions",
+    "last 2 FirefoxAndroid versions",
+    "last 2 Safari versions",
+    "last 2 iOS versions",
+    "last 2 Edge versions",
+    "last 2 Opera versions",
+    "last 2 OperaMobile versions"
+  ]
+
+
+  Dodati Pets component, proslediti mu props pets i prikazati pets. Props prihvatati sa destructuring.
+
+  Ukoliko pets.length je 0, ispisati h1 gde pise Pets not found. 
+  AKo ne ispisati sve petove u po jednom pet komponentu. Do pet proslediti, type, key, name, breed, media, location - kao state i city, id peta.
+
+  Izmeniti pet komponent tako da izgleda kao sto je on napravio.
+
+  Obezbediti unutar pet-a da se postavi placeholder slika 300x300 ukoliko ne postoji slika psa. 
+  <a href=/details/${id} className="pet">
+    <div .image-container>
+      <img
+    </div>
+    <div className="info">
+      <h1>Name</h1>
+      <h2> nesto durog</h2>
+    </div>
+  </a>
+
+
+  Dodati Reach router. Postoje React router i Reach router i jedan i drugi kaze da su dobri ali reach router se fokusira mnogo vise na focus koliko sam shvatio.
+  Velika razlika izmedju ova dva jeste sto ce Reach router, za razliku od React router, ucitati samo jednu stranicu koja se *NAJVISE* poklapa nekoj ruti koja je pogodjenja. React router prikazuje sve rute koje se poklapaju sa odredjenom rutom. *NAJVISE* odredjuje njihov algoritam za odredjivanje koja ruta se najvise poklapa.
+  REdosled definisanja ruta NIJE BITNA.
+  Kod Reach router-a je moguce definisati vise router-a na vise razlicitih strana, gde oni funkcionisu totalno ne zavisno jedan od drugog.
+  Ne mora sve da bude unutar <Router>. Pravilo Reach router0a jeste da unutar Router taga moze biti samo ono sto ima link i path atribute
+  
+  Dodati Details.js komponentu. Vraca samo h1 sa nebitnim tekstom.
+  Importovati Router iz @reach/router, na taj nacin pustam parcel da sam instalira ovo.
+
+  Unutar app.js dodati <Router> searchparams path="/" | details path="/details/:id" </Router>
+
+  Definisati link od Adopt me sa <Link to="/"/>\
+
+
+  Class components
+
+  Moraju imati render metod!!! Hooks ne rade sa klasnim komponentama 
+
+  Promeniti da Details bude class-na komponenta.
+
+  Unutar componentDidMount kontaktirati pet i dohvatiti jednu animal sa id koji smo prosledili kroz url adresu.
+  Kada ona stigne postaviti stanje sa this.setState({
+    name: anmial.name,
+    animal: animal.type,
+    lokacija: grad drzava,
+    description,
+    media,
+    breed,
+    loading:false
+  })
+
+  Ovaj loading resavamo sa konstruktorom gde postavljamo da je loading true, a kada podaci stignu onda smo u stanju loading false.
+
+  definisati render.
+
+  Ako je loading true pokazati sliku loading-a. Ako nije, uraditi destructuring svega u state. 
+  Nakon toga 
+  div.details 
+    div
+      h1{name}
+      h1{animal location breed}
+      button Adopt
+      p{description}
+  
+  
+  Napraviti Slider klasnu komponentu. Njen cilj ce biti da prikazuje slike, i u stanju ce imati aktivnu sliku i niz slika. Aktivna je broj.
+
+  div.carousel
+    img
+    div.carousel-smaller
+      {photos.map}
+        img 
+          key 
+          onClick = definisati funkciju za klik koja ce dohvatati index i postavljati index kao aktivna slika
+          data-index={}
+          src
+          klasa - ako je index isto sto i aktivna slika staviti klasu active, ako ne nista
+          alt 
+
+
+  Error Boundaries.
+
+  
+  
+  static getDerivedStateFromProps - pogledati dokumentaciju
