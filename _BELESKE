@@ -264,4 +264,12 @@ Unutar package.json fajla, Parcel-u mogu da kazem za koje verzije browsera treba
   - Objekat definisan unutar createContext je onaj koji je default-ni ako nema provider-a unutar Component koji pusakava da koristi context sa useContext. Ako je provider definisan, koristi se vrednost value atributa unutar njega.
 
   - Ja sam gore za createContext stavio ["", ()=>{}] sa drugim parametrom funkcije da bih napravio strukturu kao sto je ona koju vraca useState. 
-  To je zato sto cu upravo kao kontext cuvati ono sto je vratio useState. Naravno nisam morao ovako mogao sam to da uradim i sa nekim tekstom obicnim koji cu cuvati u context-u. Najcesce je to obj sa prop. 
+  To je zato sto cu upravo kao kontext cuvati ono sto je vratio useState. Naravno nisam morao ovako mogao sam to da uradim i sa nekim tekstom obicnim koji cu cuvati u context-u. Najcesce je to obj sa prop.
+
+  PORTALS
+
+  - Cela aplikacija se unutar React-a pise u root komponenti. Medjutim cesto se dolazi do toga da bi bilo veoma dobro da se deo aplikacije pise van tog root diva.
+  Ovde u app bilo je potrebno napraviti div koji ce otvoriti pop up modal. 
+  Kako bi taj modal zahtevao mnogo mnogo css-a i truda da se napravi unutar root diva, mi pravimo iznad root diva jos jedan div modal kome cemo pomocu modal-a upisati sadrzaj.
+
+  

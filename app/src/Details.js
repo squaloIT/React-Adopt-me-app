@@ -1,21 +1,38 @@
 import React, { Component } from "react";
+import { navigate } from "@reach/router";
 import pet from "@frontendmasters/pet";
 import Carousel from "./Carousel";
 import ErrorBoundary from "./ErrorBoundary";
 import ThemeContext from "./ThemeContext";
+import Modal from "./Modal";
 
 class Details extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      loading: true
+      loading: true,
+      showModal: false
     };
+    this.adopt = this.adopt.bind(this);
+    this.changeShowModal = this.changeShowModal.bind(this);
+  }
+
+  changeShowModal() {
+    this.setState((state, props) => {
+      return {
+        showModal: !this.state.showModal
+      };
+    });
+  }
+  adopt() {
+    navigate(this.state.url);
   }
   async docekajAnimal() {
     const { animal } = await pet.animal(this.props.id);
-    console.log(animal);
+    // console.log(animal);
     this.setState({
+      url: animal.url,
       name: animal.name,
       type: animal.type,
       location:
@@ -59,10 +76,26 @@ class Details extends Component {
           </h1>
           <ThemeContext.Consumer>
             {([theme]) => (
-              <button style={{ backgroundColor: theme }}>Adopt me!</button>
+              <button
+                style={{ backgroundColor: theme }}
+                onClick={this.changeShowModal}
+              >
+                Adopt me!
+              </button>
             )}
           </ThemeContext.Consumer>
           <p>{this.state.description}</p>
+          {this.state.showModal ? (
+            <Modal>
+              <div>
+                <h1>Would you like to adopt {this.state.name}?</h1>
+                <div className="buttons">
+                  <button onClick={this.adopt}>Yes</button>
+                  <button onClick={this.changeShowModal}>No</button>
+                </div>
+              </div>
+            </Modal>
+          ) : null}
         </div>
       </div>
     );
