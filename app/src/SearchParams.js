@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import useDropdown from "./useDropdown";
 import pet, { ANIMALS } from "@frontendmasters/pet";
 import Pets from "./Pets";
+import ThemeContext from "./ThemeContext";
 
 //Kada postavim @ ispred nekog import-a, a imam instaliran parcer, on ce ovo sto sam importovao instalirati za mene kroz npm!
 
 const SearchParams = () => {
+  const [theme, setTheme] = useContext(ThemeContext);
   const [location, setLocation] = useState("Seattle, WA");
   const [breeds, setBreeds] = useState([]);
   const [pets, setPets] = useState([]);
@@ -59,9 +61,18 @@ const SearchParams = () => {
             onChange={e => setLocation(e.target.value)}
           />
         </label>
+        <label htmlFor="Theme">
+          Theme
+          <select onChange={e => setTheme(e.target.value)}>
+            <option value="darkblue">Dark blue</option>
+            <option value="peru">Peru</option>
+            <option value="chartreuse">chartreuse</option>
+            <option value="mediumorchid">mediumorchid</option>
+          </select>
+        </label>
         <AnimalDropdown />
         <BreedDropdown />
-        <button>Submit</button>
+        <button style={{ backgroundColor: theme }}>Submit</button>
       </form>
       <Pets pets={pets} />
     </div>

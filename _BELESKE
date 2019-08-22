@@ -245,3 +245,23 @@ Unutar package.json fajla, Parcel-u mogu da kazem za koje verzije browsera treba
     ERRORBOUNDARY KAKO SMO GA NAPISALI RADI SAMO SA SVOJOM DECOM. TAKO DA NE MOGU DA VRAPUJEM CELU APLIKACIJU NJIME, NEGO MORAM DA GA KORISTIM KAO HOC KAKO BIH MOGAO DA GA KORISTIM.
   
   static getDerivedStateFromProps - pogledati dokumentaciju
+
+
+  Context 
+
+  - Unutar konteksta moze da se nalazi bilo sta bukvalno. Funkcija, string, number sta god..
+  - Context se pravi kao komponenta koja ucitava createContext i sa tim createContext definise promenljive i njihove vrednosti koje ce biti dostupne bilo gde unutar aplikacije - globalno gde god ucitam komponentu.
+  - Mogu da definisem i vise ovih COntext-a sa razlicitim vrednostima ali to je bas za neke spec slucajeve
+
+  createContext(["green", () => {}]); 
+  - Ovo je funkcija koja definise moj context. 
+  Ona vraca dva objekta, takozvani Provider i Consumer.
+  
+  - Provider definise scope mog context-a, i njega definisem samo jednom unutar svoje aplikacije. Context ce biti dostupan samo unutar Provider-a.
+
+  - Consumer je nacin na koji uzimam context iz definisanog Provider-a. Consumer uzima funkciju kao child, i unutar te funkcije dostupan je context. Mi necemo na taj nacin koristiti context vec cemo ga konzumirati kroz useContext.
+
+  - Objekat definisan unutar createContext je onaj koji je default-ni ako nema provider-a unutar Component koji pusakava da koristi context sa useContext. Ako je provider definisan, koristi se vrednost value atributa unutar njega.
+
+  - Ja sam gore za createContext stavio ["", ()=>{}] sa drugim parametrom funkcije da bih napravio strukturu kao sto je ona koju vraca useState. 
+  To je zato sto cu upravo kao kontext cuvati ono sto je vratio useState. Naravno nisam morao ovako mogao sam to da uradim i sa nekim tekstom obicnim koji cu cuvati u context-u. Najcesce je to obj sa prop. 
