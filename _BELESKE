@@ -487,3 +487,15 @@ const ReducerComponent = () => {
 
     - Centralno mesto za sadrzaj moje aplikacije. On kaze da i ne zna bas koliko bi ga danas realno koristio, ali opet ga valja znati.
     - On je veoma mocan jer ga je moguce testirati veoma lako.
+
+    Redux devtools mi omogucava da kreiram test za neku akciju unutar Redux dev tools!!! 
+
+    IDEJA ZA PROJEKAT - DODATI DEO GDE SE PRATE AKCIJE KORISNIKA, I AKO NESTO PODJE PO ZLU SALJE CE KOMPLETAN IZVESTAJ U VIDU JSON-A STA JE KORISNIK URADIO KAKO BI DOSLO DO TOGA
+
+
+
+    TESTIRANJE
+
+    Radicemo sa JEST-om.
+    JEST trazi unutar projekta folder sa nazivom __test__, i unutar njega izvrsava testove. Kada god imam dunderscore, simbolika njega jeste da time kazem da ce nesto traziti taj element pod upravo tim imenom. 
+    

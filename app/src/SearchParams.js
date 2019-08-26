@@ -1,14 +1,17 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 import useDropdown from "./useDropdown";
 import pet, { ANIMALS } from "@frontendmasters/pet";
 import Pets from "./Pets";
-import ThemeContext from "./ThemeContext";
+import changeTheme from "./redux/actionCreators/changeTheme";
+import changeLocation from "./redux/actionCreators/changeLocation";
+// import ThemeContext from "./ThemeContext";
 
 //Kada postavim @ ispred nekog import-a, a imam instaliran parcer, on ce ovo sto sam importovao instalirati za mene kroz npm!
 
-const SearchParams = () => {
-  const [theme, setTheme] = useContext(ThemeContext);
-  const [location, setLocation] = useState("Seattle, WA");
+const SearchParams = props => {
+  // const [theme, setTheme] = useContext(ThemeContext);
+  // const [location, setLocation] = useState("Seattle, WA");
   const [breeds, setBreeds] = useState([]);
   const [pets, setPets] = useState([]);
   const [animal, AnimalDropdown] = useDropdown("Animal", "dog", ANIMALS);
@@ -19,13 +22,12 @@ const SearchParams = () => {
 
   async function getPetsAPI() {
     const { animals } = await pet.animals({
-      location,
+      location: props.location,
       breed,
       type: animal
     });
 
     setPets(animals || []);
-    console.log(pets);
   }
 
   useEffect(() => {
@@ -56,14 +58,17 @@ const SearchParams = () => {
           <input
             type="text"
             id="id"
-            value={location}
+            value={props.location}
             placeholder="Location"
-            onChange={e => setLocation(e.target.value)}
+            onChange={e => props.updateLocation(e.target.value)}
           />
         </label>
         <label htmlFor="Theme">
           Theme
-          <select onChange={e => setTheme(e.target.value)}>
+          <select
+            onChange={e => props.updateTheme(e.target.value)}
+            value={props.theme}
+          >
             <option value="darkblue">Dark blue</option>
             <option value="peru">Peru</option>
             <option value="chartreuse">chartreuse</option>
@@ -72,10 +77,24 @@ const SearchParams = () => {
         </label>
         <AnimalDropdown />
         <BreedDropdown />
-        <button style={{ backgroundColor: theme }}>Submit</button>
+        <button style={{ backgroundColor: props.theme }}>Submit</button>
       </form>
       <Pets pets={pets} />
     </div>
   );
 };
-export default SearchParams;
+
+const mapStateToProps = ({ theme, location }) => ({
+  theme,
+  location
+});
+
+const mapDispatchToProps = dispatch => ({
+  updateTheme: theme => dispatch(changeTheme(theme)),
+  updateLocation: location => dispatch(changeLocation(location))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SearchParams);

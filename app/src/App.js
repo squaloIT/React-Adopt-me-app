@@ -1,18 +1,18 @@
-import React, { useState, lazy, Suspense } from "react";
+import React, { lazy, Suspense } from "react";
 import SearchParams from "./SearchParams";
 // import Details from "./Details";
 import { Router } from "@reach/router";
-import ThemeContext from "./ThemeContext";
+//Omogucava mi da Redux store postoji svuda unutar moje aplikacije
+import { Provider } from "react-redux";
 import NavBar from "./NavBar";
+import store from "./redux/store";
 
 const Details = lazy(() => import("./Details"));
 
 const App = () => {
-  const theme = useState("darkblue"); // [state, setState]
-
   return (
     <React.StrictMode>
-      <ThemeContext.Provider value={theme}>
+      <Provider store={store}>
         <div>
           <NavBar />
           <Suspense
@@ -29,7 +29,7 @@ const App = () => {
             </Router>
           </Suspense>
         </div>
-      </ThemeContext.Provider>
+      </Provider>
     </React.StrictMode>
   );
 };
