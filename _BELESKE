@@ -272,4 +272,218 @@ Unutar package.json fajla, Parcel-u mogu da kazem za koje verzije browsera treba
   Ovde u app bilo je potrebno napraviti div koji ce otvoriti pop up modal. 
   Kako bi taj modal zahtevao mnogo mnogo css-a i truda da se napravi unutar root diva, mi pravimo iznad root diva jos jedan div modal kome cemo pomocu modal-a upisati sadrzaj.
 
+  - Napravio sam komponentu Modal koja ce se preko portala ustvari i upisati u onaj div#modal.
+  Ova komponenta ne vraca JSX vec vraca sta god da vrati createPortal() funkcija. Create portal uzima  children  koje treba da upise kao prvi parametar, a drugi je gde ce upisati children.
+
+  - OSim toga sve se tice react-a. 
+
+  UseRef 
+
+  - useRef je funkcija ugradjena u react koja mi omogucava da korsitim jednu verziju nekog elementa i da sa njim radim sta god mi je volja. Kod komponenata, ako napravim 3 komponente koje imaju stanje unutra svaka od njih ce stanje drzati za sebe. Ako dohvatim neki html element sa useRef sigurno koristim samo tu jednu verziju. Nije najbolje objasnjenje i svakako bi trebao procitati vise o useRef
+
+  - Evo bolje objasnjenja sa INTERMEDIATE react-a. Ovde je dao primer gde se klikom na dugme povecaj povecavaju vrednosti za state.num i ref num. Prilikom ispisivanja na stranici ti brojevi su isti, ali oni prilikom re render-a ispisuje alert koji ispisuje da je ref num veci za 1 od state num.
+
+  const [stateNumber, setStateNumber] = useState(0);
+  const numRef = useRef(0);
+
+  function incrementAndDelayLogging() {
+    setStateNumber(stateNumber + 1);
+    numRef.current++;
+    setTimeout(
+      () => alert(`state: ${stateNumber} | ref: ${numRef.current}`),
+      1000
+    );
+  }
+
+  return (
+    <div>
+      <h1>useRef Example</h1>
+      <button onClick={incrementAndDelayLogging}>delay logging</button>
+      <h4>state: {stateNumber}</h4>
+      <h4>ref: {numRef.current}</h4>
+    </div>
+  );
+
+  Zasto ovo radi kaze da je zbog closure-a koji idalje drzi vrednost za state num. 
+  Kada je ref koristan onda? UseRef je veoma koristan kada je potrebno imati vrednost za koju zelim da se drzim i ne zelim da bude ne stabilna. Na primer ako cesto radim nesto sa elementom doma unutar func based componente onda bi ona trebala da bude ref kako ne bi bilo nekih ne predvidjenih okolnosti.
+
+  ********************** INTERMEDIATE REACT **********************
+
+  Hooks in-Depth
+
+  useReducer 
+  - On je hook. A termin Reducer znaci da je to funkcija koja uzima staro stanje, neku akciju koju treba izvesti nad tim starim stanjem, i vraca novo stanje koje je uzrok akcije.
+
+  - useReducer vraca dve stvari: Objekat koji predstavlja trenutno stanje, a drugo je dispatcher koji mi omogucaava da dispatchujem akciju do reducera.
+
+  - Funkcija koja uzima staro stanje i akciju mora da se definise u kodu. Ona ima upravo ta dva parametra i kao rezultat mora vratiti novo stanje.
+
+  - Primer koda: 
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "INCREMENT_R":
+      return Object.assign({}, state, { r: limitRGB(state.r + step) });
+    case "DECREMENT_R":
+      return Object.assign({}, state, { r: limitRGB(state.r - step) });
+    case "INCREMENT_G":
+      return Object.assign({}, state, { g: limitRGB(state.g + step) });
+    case "DECREMENT_G":
+      return Object.assign({}, state, { g: limitRGB(state.g - step) });
+    case "INCREMENT_B":
+      return Object.assign({}, state, { b: limitRGB(state.b + step) });
+    case "DECREMENT_B":
+      return Object.assign({}, state, { b: limitRGB(state.b - step) });
+    default:
+      return state;
+  }
+};
+
+const ReducerComponent = () => {
+  const [{ r, g, b }, dispatch] = useReducer(reducer, { r: 0, g: 0, b: 0 });
+
+  return (
+    <div>
+      <h1 style={{ color: `rgb(${r}, ${g}, ${b})` }}>useReducer Example</h1>
+      <div>
+        <span>r</span>
+        <button onClick={() => dispatch({ type: "INCREMENT_R" })}>➕</button>
+        <button onClick={() => dispatch({ type: "DECREMENT_R" })}>➖</button>
+      </div>
+      <div>
+        <span>g</span>
+        <button onClick={() => dispatch({ type: "INCREMENT_G" })}>➕</button>
+        <button onClick={() => dispatch({ type: "DECREMENT_G" })}>➖</button>
+      </div>
+      <div>
+        <span>b</span>
+        <button onClick={() => dispatch({ type: "INCREMENT_B" })}>➕</button>
+        <button onClick={() => dispatch({ type: "DECREMENT_B" })}>➖</button>
+      </div>
+    </div>
+  );
+
+  On kaze kako sada mnogo manje koristi Redux, jer sa useContext i useReducer bukvalno dobija istu funkcionalnost.
+
+
+  useMemo() 
+
+  - useMemo je funkcija koja mi omogucava da unutar jedne komponetne ne moram da re renderujem ne potrebne stvari. Ako imam neku komplikovanu funkciju kojoj treba mnogo vremena da se izvrsi, i ona se izvrsava svaki put kada se nesto prikazuje, nikako nema smisla da nju izvrsavam svaki put kada se promeni neka glupost u komponenti.
+  Za tu funkciju - u kodu fibonaci - mogu da je dodelim useMemo i definisem dependency kada ta funkciaj treba da se izvrsi. 
   
+  const fib = useMemo(() => fibonacci(num), [num]) - Samo kada se num promeni, izvrsi ce se fibonacci funkcija.
+
+
+  useLayoutEffect()
+
+  - Dobar kada je potrebno izmeriti nesto sto je deo DOM-a. Radi po istom principu kao i useEffect kada je u pitanju dependency kada ce se ponovo izvrsiti. Prazan niz drugi parametar samo jednom!
+  - Jedina razlika u ova dva metoda jeste sto je useEffect donekle asinhron. I on BI TREBALO da se desi nakon re rendera, ali ne zna se tacno u kom trenutku. Dok je useLayout sinhron u tom smislu jer se sigurno desava odmah nakon rendera!
+  
+  import React, { useState, useLayoutEffect, useRef } from "react";
+
+  const LayoutEffectComponent = () => {
+      const [width, setWidth] = useState(0);
+      const [height, setHeight] = useState(0);
+      const el = useRef();
+
+      useLayoutEffect(() => {
+        setWidth(el.current.clientWidth);
+        setHeight(el.current.clientHeight);
+      });
+
+      return (
+        <div>
+          <h1>useLayoutEffect Example</h1>
+          <h2>textarea width: {width}px</h2>
+          <h2>textarea height: {height}px</h2>
+          <textarea
+            onClick={() => {
+              setWidth(0);
+            }}
+            ref={el}
+          />
+        </div>
+      );
+    };
+
+    export default LayoutEffectComponent;
+
+
+
+
+
+    EmotionJS - Pisanje CSS koda unutar JS-a
+
+    - Dozvoljava mi da pisem CSS kod unutar JS-a na neki nacin, i on ce na kraju napraviti CSS kod za mene. Bukvalno ne moram da imam ni jedan jedini css fajl.
+
+
+
+    Code Splitting - 
+
+    - Ne znaci da ce se kod deliti, vec da ne zelim da ucitam u svakom trenutku celu aplikaciju.
+    - Pomocu Code Splitting-a ja ustvari odlazem ucitavanje jednog dela sajta ( uglavnom stranice ) za kasnije.
+
+    - To radim sa lazy i Suspence koje ucitavam iz react.
+    - lazy je tu da ucita moju komponentu. Vise necu imati import .Details u komponenti koja treba da je prikaze, vec const Details = lazy(() => import('./Details'));
+
+    - Osim ovoga unutar komponente koja ima Router unutar sebe, potrebno je da ubacim ceo <Router> u <Suspense fallback={<h1>Neki markup koji ce se prikazati dok se ucitavati Details, odnosno razresava promise import-a</h1>}>
+    - To je sve sto treba da se uradi kako bi lazy loadovao nesto.
+    - Iskoristim lazy da ucitam komponentu, i ceo router ubacim u suspense.
+
+    - Ovde takodje imam primer kada lazy ucitavam Modal popup prozor jer njega treba ucitati samo ako se klikne na dugme. Kod njega sam iskoristio samo lazy import bez Suspense i radilo je sasvim regularno.
+    To je zato sto imam vec definisan jedan suspense na vrhu aplikacije! Mogao sam da citam i neki novi ako je potrebno, ali posto vec imam ovaj to je bilo dovoljno.
+
+
+    Server Side Rendering 
+
+    - Ovo se radi kada je potrebno ubrzati prikaz nase aplikacije. Kako stvari stoje trenutno, mi korisniku saljemo samo 20 linija html koda inicijalno! Nakon toga je potrebno dohvatiti ceo JS koji ce napraviti celu nasu stranicu na korisnikovom browser-u.
+
+    - Prilikom lose internet konekcije ovo moze biti problematicno jer korisnik inicijalno nece videti nista. Mnogo je bolje prikazati barem nesto, i onda cekati da se JS ucita i izvrsi svoj kod.
+
+    IMPLEMENTACIJA
+
+    - Napravljena je komponenta koja se zove ClientApp.js. Njen cilj je samo da ucita App pomocu hydrate funkcije. 
+    - hydrate je veoma slicna render funkciji. Render ce sav sadrzaj koji se nadje unutar target-ovanog html elementa override-ovati. Dok ce hydrate na HTML koji je inicijalno poslat server side renderingom dodati JS kod React-a.
+
+    - Nadalje moram voditi racuna o komponentama, odnosno da nijedna od njih ne poziva neke funkcije vezane za browser odnosno window, jer ce svaka od njih inicijalno biti izvrsena na serveru gde nemam mogucnost rada sa DOM-om.
+    - Svaki kod koji sadrzi rad sa window (document.getElement itd) moram prebaciti u componentDidMount ili useEffect funkcije jer se one izvrsavaju tek kada se komponenta mount-uje.
+
+
+    npm install babel-cli express 
+    
+    "build": "parcel build --public-url ./dist/ src/index.html",
+    "start": "npm -s run build && babel-node server/index.js"
+
+    Dalje je potrebno ubaciti ove dve linije koda. Prva je tu da build-uje nasu production verziju unutar dist folder-a, to ce biti precompiled verzija naseg JS-a.
+
+    - Pogledati index.js fajl unutar server folder-a kako bi dalje video kako ovo funkcionise sa strane Node.js-a
+
+
+
+    TypeScript
+
+    - Konfiguracija za React.
+
+      npm install -D typescript
+      npx tsc --init        - Kako bi se inicijalizovao tsconfig.json
+      
+      Unutar tsconfig.json odkomentarisati jsx: preserve. Promeniti preserve u react.
+
+      Next we need to install the types for our project. Not all projects are written in TypeScript so another project, DefinitelyTyped, provides third party types for your library. 
+      In order to install these types, 
+      * run npm install -D @types/react @types/react-dom @types/reach__router *
+      . This will grab all these type definitions.
+
+    - Ukoliko zelim da koristim JSX unutar Typescript fajla, fajl mora imati ekstenziju .tsx.
+
+
+    Dalje nam umesto ESLINT-a treba TSLINT. TSLINT ce kasnije postati deo ESLINT-a i svi ce koristiti ESLINT.
+
+    npm uninstall eslint babel-eslint eslint-config-prettier eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks
+  
+
+
+    Redux
+
+    - Centralno mesto za sadrzaj moje aplikacije. On kaze da i ne zna bas koliko bi ga danas realno koristio, ali opet ga valja znati.
+    - On je veoma mocan jer ga je moguce testirati veoma lako.

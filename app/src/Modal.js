@@ -1,7 +1,5 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, ReactChild } from "react";
 import { createPortal } from "react-dom";
-
-const modalDiv = document.getElementById("modal");
 
 const Modal = props => {
   const divRef = useRef(null);
@@ -11,6 +9,7 @@ const Modal = props => {
   }
 
   useEffect(() => {
+    const modalDiv = document.getElementById("modal");
     modalDiv.appendChild(divRef.current);
 
     return () => {
@@ -18,7 +17,7 @@ const Modal = props => {
     };
   }, []);
 
-  return createPortal(<div>{props.children}</div>, modalDiv);
+  return createPortal(<div>{props.children}</div>, divRef.current);
 };
 
 export default Modal;
